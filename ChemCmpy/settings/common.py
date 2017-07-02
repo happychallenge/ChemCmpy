@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 # User
     'products',
+    'authentication',
 
 ]
 
@@ -127,6 +128,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-# LOGIN_URL = reverse_lazy('login')
+LOGIN_URL = reverse_lazy('login')
 # LOGOUT_URL = reverse_lazy('logout')
 
