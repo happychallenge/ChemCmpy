@@ -61,13 +61,13 @@
                     {% for product in product_list %}
                         <tr class="gradeX">
                             <td>
-                                <a href="{% url 'products:product_detail' product.id %}">{{ product.cn_name }} <br> {{product_en_name|upper}}</a> 
+                                <a href="{% url 'chemical:product_detail' product.id %}">{{ product.cn_name }} <br> {{product_en_name|upper}}</a> 
                             </td>
                             <td>{{ product.cas_no}}</td>
                             <td>{{ product.category }}</td>
                             <td>{{ product.cn_hscode }} <br> {{product.ko_hscode}} </td>
                             <td>{{ product.rate_taxrefund }}</td>
-                            <td>{{ product.created_at }}</td>
+                            <td>{{ product.created_at|date:'y/M/d' }}</td>
                         </tr>
                     {% endfor %}
                         

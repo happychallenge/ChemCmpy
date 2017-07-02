@@ -23,9 +23,9 @@ from django.shortcuts import redirect
 from authentication import views as signup_views
 
 urlpatterns = [
-    url('^$', lambda r: redirect('/products/vendors/'), name='home'),
+    url('^$', lambda r: redirect('/chemical/vendors/'), name='home'),
     url(r'^xmlyoon/', admin.site.urls),
-    url(r'^products/', include('products.urls', namespace='products')),
+    url(r'^chemical/', include('products.urls', namespace='chemical')),
     url(r'^authentication/', include('authentication.urls', namespace='authentication')),
 
     url(r'^signup/$', signup_views.signup, name='signup'),

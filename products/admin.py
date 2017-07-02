@@ -20,7 +20,7 @@ class TagAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     class Meta:
         model = Contact
-    list_display = ['cn_name', 'role', 'email', 'mobile', 'wechat', 'qq']
+    list_display = ['cn_name', 'vendor', 'role', 'mobile', 'email',  'wechat', 'qq']
 
 
 @admin.register(Category)

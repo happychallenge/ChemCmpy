@@ -42,6 +42,7 @@ class Vendor(models.Model):
     gprelation = models.CharField(max_length=20, choices=GPRELATION, default=CURRENT, verbose_name='GP RELATION')
     companytype = models.CharField(max_length=20, choices=COMPANYTYPE, default=MANUFACTURER)
     tags = models.ManyToManyField('Tag', blank=True)
+    comments = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -75,7 +76,7 @@ class Contact(models.Model):
         (SALESMAN, 'SalesMan'),
     )
     user = models.OneToOneField(settings.AUTH_USER_MODEL,blank=True, null=True)
-    vendor = models.OneToOneField(Vendor,blank=True, null=True)
+    vendor = models.ForeignKey(Vendor,blank=True, null=True)
     cn_name = models.CharField(max_length=30, verbose_name='CHINESE NAME')
     en_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='ENGLISH NAME')
     role = models.CharField(max_length=2, choices=ROLE, default=SALESMAN)
@@ -123,6 +124,9 @@ class Product(models.Model):
     usage = models.TextField(max_length=500, verbose_name='용도', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = [ 'en_name', ]
+
     def __str__(self):
         return self.cn_name
 
@@ -161,13 +165,13 @@ class Quotation(models.Model):
     companyproduct = models.ForeignKey(VendorProduct)
     price = models.FloatField()
     currency = models.CharField(max_length=1, choices=CURRENCY, default=RMB)
-    quote_date = models.DateTimeField(auto_now_add=True)
+    quote_date = models.DateTimeField()
     effective_date = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS, default=VALID)
     comments = models.TextField(blank=True, null=True)
 
     class Meta:
-        ordering = [ '-quote_date', ]
+        ordering = [ '-status', '-quote_date', ]
 
     def __str__(self):
         return "{}".format(self.companyproduct)
